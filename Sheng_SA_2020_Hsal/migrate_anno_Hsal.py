@@ -71,18 +71,57 @@ print(len(Hsal_me_set & Hsal_51_set))
 print(len(Hsal_me_set) - len(Hsal_me_set & Hsal_51_set)) # 1772
 # %%
 Hsal_51_celltype = Hsal_51_cluster["cell_type"]
-Hsal_me.obs["cell_type"] =  Hsal_me.obs["key"].map(Hsal_51_celltype).fillna('Unknown')
+Hsal_me.obs["cell_type_51"] =  Hsal_me.obs["key"].map(Hsal_51_celltype).fillna('Unknown')
 Hsal_me.obs
 # %%
 # 统计分类变量出现频次, Unknown 正好是 1772
-Hsal_me.obs.groupby('cell_type').size()
+Hsal_me.obs.groupby('cell_type_51').size()
 # %%
-Hsal_me.write_h5ad("./Hsal_me_with_51_anno.h5ad")
 # %%
 sc.pl.embedding(
         Hsal_me,
         basis="X_umap",
-        color="leiden",
+        color="leiden_res0.50",
+        # legend_loc="on data"
+    )
+
+sc.pl.embedding(
+        Hsal_me,
+        basis="X_umap",
+        color="cell_type_51",
+        # legend_loc="on data"
+    )
+# %%
+# ------------------------------------- Hsal 50 -------------------------------------
+# 
+Hsal_50_cluster = Hsal_50.obs[["cluster_name"]]
+Hsal_50_celltype = Hsal_50_cluster["cluster_name"]
+Hsal_me.obs["key_50"] = Hsal_me.obs["key"].str[:-4] # 注意, Hsal_50.obs_names 中 barcode 去除了后四个碱基
+Hsal_me.obs["cell_type_50"] =  Hsal_me.obs["key_50"].map(Hsal_50_celltype).fillna('Unknown')
+Hsal_me.obs
+# %%
+Hsal_me.obs.groupby('cell_type_50').size()
+# %%
+sc.pl.embedding(
+        Hsal_me,
+        basis="X_umap",
+        color="cell_type_50",
         legend_loc="on data"
     )
+
+sc.pl.embedding(
+        Hsal_me,
+        basis="X_umap",
+        color="cell_type_51",
+        legend_loc="on data"
+    )
+
+sc.pl.embedding(
+        Hsal_me,
+        basis="X_umap",
+        color="leiden_res1.00",
+        legend_loc="on data"
+    )
+# %%
+Hsal_me.write_h5ad("./Hsal_me_with_5051_anno.h5ad")
 # %%
