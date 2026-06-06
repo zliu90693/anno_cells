@@ -24,11 +24,6 @@ sc.pp.calculate_qc_metrics(
 sc.pp.filter_genes(Hsal_50, min_cells=20)
 Hsal_50
 # %%
-total_cells = Hsal_50.n_obs
-Hsal_50.var['n_cells_not_detected'] = total_cells - Hsal_50.var['n_cells_by_counts']
-mask = Hsal_50.var['n_cells_not_detected'] >= 20
-num_genes = mask.sum()
-# %%
 # ------------------------------------- 开始迁移注释 -------------------------------------
 
 # %%
