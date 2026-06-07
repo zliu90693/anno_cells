@@ -120,3 +120,27 @@ sc.pl.embedding(
 # %%
 Hsal_me.write_h5ad("./Hsal_me_with_5051_anno.h5ad")
 # %%
+Hsal_me = sc.read_h5ad("./Hsal_me_with_5051_anno.h5ad")
+Hsal_me
+# %%
+sc.pl.embedding(
+        Hsal_me,
+        basis="X_umap",
+        color="cell_type_50",
+        legend_loc="on data"
+    )
+
+sc.pl.embedding(
+        Hsal_me,
+        basis="X_umap",
+        color="cell_type_51",
+        legend_loc="on data"
+    )
+
+sc.pl.embedding(
+        Hsal_me,
+        basis="X_umap",
+        color="leiden_res1.00",
+        legend_loc="on data"
+    )
+# %%
