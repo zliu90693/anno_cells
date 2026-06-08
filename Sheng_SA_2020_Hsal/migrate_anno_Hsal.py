@@ -47,6 +47,7 @@ Hsal_me.obs["GSM"] = Hsal_me.obs.index.str.split("_").str[-1]
 Hsal_me.obs
 # %%
 # 手动通过 ncbi 整理 GSM 与 internal_name 的对应关系, 得到 GSM_vs_internalname.csv
+# internal_name 可通过 Sample 界面获取: https://www.ncbi.nlm.nih.gov/biosample/SAMN12525547
 GSM_vs_internalname = pd.read_csv("./GSM_vs_internalname.csv", index_col="GSM")["internal_name"]
 GSM_vs_internalname # GSM_vs_internalname 是一个 Array
 # %%
