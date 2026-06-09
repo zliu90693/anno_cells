@@ -160,6 +160,8 @@ sc.tl.dendrogram( # 纯粹为了美观和生物学逻辑。它的作用是让后
 # %%
 Hsal_me.write_h5ad("./Hsal_me_with_wilcoxon_DEG.h5ad")
 # %%
+# Hsal_me = sc.read_h5ad("./Hsal_me_with_wilcoxon_DEG.h5ad")
+# %%
 sc.pl.rank_genes_groups_dotplot(
     Hsal_me, 
     groupby="leiden_res1.00", 
@@ -182,5 +184,32 @@ sc.pl.rank_genes_groups_dotplot(
     standard_scale="var", 
     n_genes=5, 
     key="leiden_res1.00_DEG_filtered"
+)
+# %%
+# 使用数据集形式展示的Markers
+Hsal_me_deg_df = sc.get.rank_genes_groups_df(
+    Hsal_me, 
+    group=None, 
+    key='leiden_res1.00_DEG'
+)
+# %%
+Hsal_me_deg_filtered_df = sc.get.rank_genes_groups_df(
+    Hsal_me, 
+    group=None, 
+    key='leiden_res1.00_DEG_filtered'
+)
+# %%
+Hsal_50 = sc.read_h5ad("./Hsal50_with_wilcoxon_DEG.h5ad")
+Hsal_50
+# %%
+Hsal_50_deg_df = sc.get.rank_genes_groups_df(
+    Hsal_50,
+    group=None, 
+    key="50_cluster_name_DEG"
+)
+Hsal_50_deg_filtered_df = sc.get.rank_genes_groups_df(
+    Hsal_50,
+    group=None, 
+    key="50_cluster_name_DEG_filtered"
 )
 # %%
