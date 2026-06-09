@@ -138,3 +138,49 @@ for gene in list(Hsal_50.var.index):
 # Trehalase
 # Trnag-ccc
 # Trypsin-1
+
+# %%
+#! 问题4, 可视化本次和Hsal50/51中同源细胞簇识别到的Marker是否一致
+Hsal_me = sc.read_h5ad("./cluster_unannotated.h5ad")
+Hsal_me
+# %%
+Hsal_me.X = Hsal_me.layers["logcounts"].copy()
+# %%
+sc.tl.rank_genes_groups(
+    Hsal_me, 
+    groupby="leiden_res1.00", 
+    method="wilcoxon", 
+    key_added="leiden_res1.00_DEG"
+)
+# %%
+sc.tl.dendrogram( # 纯粹为了美观和生物学逻辑。它的作用是让后续画图时，相似的 cluster 能够挨在一起，并在图上方画出一个树状分支
+    Hsal_me,
+    groupby="leiden_res1.00",
+)
+# %%
+Hsal_me.write_h5ad("./Hsal_me_with_wilcoxon_DEG.h5ad")
+# %%
+sc.pl.rank_genes_groups_dotplot(
+    Hsal_me, 
+    groupby="leiden_res1.00", 
+    standard_scale="var", 
+    n_genes=5, 
+    key="leiden_res1.00_DEG"
+)
+# %%
+sc.tl.filter_rank_genes_groups(
+    Hsal_me,
+    min_in_group_fraction=0.2,
+    max_out_group_fraction=0.2,
+    key="leiden_res1.00_DEG",
+    key_added="leiden_res1.00_DEG_filtered",
+)
+# %%
+sc.pl.rank_genes_groups_dotplot(
+    Hsal_me, 
+    groupby="leiden_res1.00", 
+    standard_scale="var", 
+    n_genes=5, 
+    key="leiden_res1.00_DEG_filtered"
+)
+# %%
