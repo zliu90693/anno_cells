@@ -207,9 +207,58 @@ Hsal_50_deg_df = sc.get.rank_genes_groups_df(
     group=None, 
     key="50_cluster_name_DEG"
 )
+# %%
+sc.tl.filter_rank_genes_groups(
+    Hsal_50,
+    min_in_group_fraction=0.2,
+    max_out_group_fraction=0.2,
+    key="50_cluster_name_DEG",
+    key_added="50_cluster_name_DEG_filtered",
+)
+# %%
 Hsal_50_deg_filtered_df = sc.get.rank_genes_groups_df(
     Hsal_50,
     group=None, 
     key="50_cluster_name_DEG_filtered"
 )
+# %%
+def get_specific_cluster_markers(
+        df, 
+        cluster: str
+    ):
+    not_na = df[~df["names"].isna()]
+    specific_cluster = not_na[not_na["group"] == cluster]
+    return specific_cluster
+# %%
+Hsal_50_filtered_0 = get_specific_cluster_markers(Hsal_50_deg_filtered_df, "0-lKCB")
+Hsal_50_filtered_0.to_csv("./markers/Hsal_50_filtered_0.csv")
+# %%
+Hsal_me_filtered_8 = get_specific_cluster_markers(Hsal_me_deg_filtered_df, "8")
+Hsal_me_filtered_8.to_csv("./markers/Hsal_me_filtered_8.csv")
+# %%
+sc.pl.embedding(
+        Hsal_me,
+        basis="X_umap",
+        color="leiden_res1.00",
+        legend_loc="on data"
+    )
+
+# %%
+# Hsal_me markers
+sc.pl.embedding(
+        Hsal_me,
+        basis="X_umap",
+        color=["LOC105184250", "LOC105188505", "LOC105191412", "LOC105185582", "LOC105181733", "LOC105188158", "LOC105182316", "LOC105185245", "LOC105188786", "LOC105184058"],
+        # legend_loc="on data"
+        cmap='Reds'
+    )
+# %%
+# Hsal_50 markers
+sc.pl.embedding(
+        Hsal_me,
+        basis="X_umap",
+        color=["LOC105181733", "LOC105188505", "LOC105185582", "LOC105191923", "LOC105184868", "LOC105182093", "LOC105192706", "LOC105188158", "LOC105183004", "LOC105182732"],
+        # legend_loc="on data"
+        cmap='Reds'
+    )
 # %%
