@@ -58,6 +58,10 @@ for reso in [0.25, 0.50, 1.00]:
     )
     fig = sc.pl.umap(Hsal_50, legend_loc="on data", color=f'leiden_res{reso:.2f}')
 # %%
+Hsal_50.write_h5ad("./Hsal50_umap_leiden.h5ad")
+
+
+# %%
 Hsal_me = sc.read_h5ad("./Hsal_me_with_5051_anno.h5ad")
 Hsal_me
 # %%
