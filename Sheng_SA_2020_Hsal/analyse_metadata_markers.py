@@ -64,3 +64,8 @@ print(check_marker(Pg_markers, s6_astr_marker))
 print(check_marker(Ctxg_markers, s6_astr_marker))
 print(check_marker(IPC_markers, s6_astr_marker))
 print(check_marker(HM_markers, s6_astr_marker))
+# %%
+# import scanpy as sc
+# Hsal_50 = sc.read_h5ad("./Hsal50_umap_leiden.h5ad")
+# Hsal_50
+# %%
