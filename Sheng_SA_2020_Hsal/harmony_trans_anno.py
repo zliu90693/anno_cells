@@ -131,8 +131,20 @@ sc.pl.umap(Hsal_combined,
         color=["neo_leiden_res_1.00"],
         legend_loc="on data")
 # %%
-sc.pl.pca(Hsal_combined, 
-        color=["batch_key"])
+# sc.pl.pca(Hsal_combined, 
+#         color=["batch_key"])
+sc.pl.embedding(
+        Hsal_combined,
+        basis="X_pca",
+        color="batch_key"
+    )
+sc.pl.embedding(
+        Hsal_combined,
+        basis="X_pca_harmony",
+        color="batch_key"
+    )
 # %%
 Hsal_combined.write_h5ad("./Hsal_me_50_harmony.h5ad")
+# %%
+Hsal_combined = sc.read_h5ad("./Hsal_me_50_harmony.h5ad")
 # %%
