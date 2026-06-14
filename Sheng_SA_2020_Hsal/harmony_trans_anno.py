@@ -116,7 +116,11 @@ for reso in [0.25, 0.5, 1.0]:
 )
 # %%
 #! visualize
-sc.pl.umap(Hsal_combined, color=["batch_key", "leiden_res1.00", "cluster_name", "neo_leiden_res_1.00"])
+# sc.pl.umap(Hsal_combined, color=["batch_key", "leiden_res1.00", "cluster_name", "neo_leiden_res_1.00"])
+# %%
+sc.pl.umap(Hsal_combined, 
+        color=["batch_key"],
+        )
 # %%
 sc.pl.umap(Hsal_combined, 
         color=["cluster_name"],
