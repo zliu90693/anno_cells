@@ -60,4 +60,52 @@ def get_specific_cluster_markers(
     specific_cluster = not_na[not_na["group"] == cluster]
     return specific_cluster
 # %%
-get_specific_cluster_markers(Hsal_me, "leiden_res1.00_DEG_filtered", "1")
+cluster1_markers = get_specific_cluster_markers(Hsal_me, "leiden_res1.00_DEG_filtered", "1")
+# %%
+cluster1_markers
+# %%
+cluster1_markers.to_csv("./markers/Hsal_me_filtered_1.csv")
+# %%
+sc.pl.embedding(
+        Hsal_me,
+        basis="X_umap",
+        cmap="Reds",
+        color=["LOC105184491", "LOC105190891", "LOC105189409", "LOC105184450", "LOC105186139"],
+        legend_loc="on data"
+    )
+# %%
+markers = cluster1_markers["names"].to_list()
+# %%
+sc.pl.embedding(
+        Hsal_me,
+        basis="X_umap",
+        cmap="Reds",
+        color=markers,
+        legend_loc="on data"
+    )
+# %%
+cluster1_markers_unfiltered = get_specific_cluster_markers(Hsal_me, "leiden_res1.00_DEG", "1")
+# %%
+cluster1_markers_unfiltered.to_csv("./markers/Hsal_me_1.csv")
+# %%
+unfilt_markers = cluster1_markers_unfiltered["names"].to_list()
+# %%
+unfilt_markers
+# %%
+sc.pl.embedding(
+        Hsal_me,
+        basis="X_umap",
+        color=["log1p_n_genes_by_counts", "total_counts"],
+        # legend_loc="on data"
+    )
+# %%
+Hsal_50 = sc.read_h5ad("./Hsal50_umap_leiden.h5ad")
+# %%
+sc.pl.embedding(
+        Hsal_50,
+        basis="X_umap",
+        cmap="Reds",
+        color=markers,
+        legend_loc="on data"
+    )
+# %%
