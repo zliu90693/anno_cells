@@ -70,7 +70,7 @@ sc.pl.embedding(
         Hsal_me,
         basis="X_umap",
         cmap="Reds",
-        color=["LOC105184491", "LOC105190891", "LOC105189409", "LOC105184450", "LOC105186139"],
+        color=["LOC105184491", "LOC105190891", "LOC105189409", "LOC105184450", "LOC105186139", "leiden_res1.00"],
         legend_loc="on data"
     )
 # %%
@@ -108,4 +108,11 @@ sc.pl.embedding(
         color=markers,
         legend_loc="on data"
     )
+# %%
+#? 如果按照原文的“基因数超过200且UMI总数超过500”对该簇进行质控，可以滤去该簇多少细胞?
+cluster1 = Hsal_me.obs[Hsal_me.obs["leiden_res1.00"] == "1"]
+cluster1 # 1871个
+# %%
+cluster1[(cluster1["n_genes_by_counts"] > 200) & (cluster1["total_counts"] > 500)]
+# 159个
 # %%
