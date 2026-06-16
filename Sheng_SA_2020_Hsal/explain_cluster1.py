@@ -116,3 +116,11 @@ cluster1 # 1871个
 cluster1[(cluster1["n_genes_by_counts"] > 200) & (cluster1["total_counts"] > 500)]
 # 159个
 # %%
+# test markers:
+sc.pl.embedding(
+        Hsal_me,
+        basis="X_umap",
+        cmap="Reds",
+        color=["LOC105187517", "LOC105184531", "LOC105187469"]
+    )
+# %%

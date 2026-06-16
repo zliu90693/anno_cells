@@ -37,6 +37,9 @@ print(check_marker(Pg_markers, s3_full_cluster_marker))
 print(check_marker(Ctxg_markers, s3_full_cluster_marker))
 print(check_marker(IPC_markers, s3_full_cluster_marker))
 print(check_marker(HM_markers, s3_full_cluster_marker))
+#          gene ID fly homolog human homolog manual annotation
+# 3   LOC105187517         mub         PCBP3               NaN
+# 48  LOC105185095      Pka-C1        PRKACA               NaN
 # %%
 print(check_marker(KC_markers, s4_neuron_marker))
 print(check_marker(DAN_markers, s4_neuron_marker))
@@ -46,6 +49,10 @@ print(check_marker(Pg_markers, s4_neuron_marker))
 print(check_marker(Ctxg_markers, s4_neuron_marker))
 print(check_marker(IPC_markers, s4_neuron_marker))
 print(check_marker(HM_markers, s4_neuron_marker))
+#          gene ID fly homolog human homolog manual annotation
+# 14  LOC105187517         mub         PCBP3               NaN
+# 22  LOC105185095      Pka-C1        PRKACA               NaN
+# 111  LOC105184994         Gat        SLC6A1               NaN
 # %%
 print(check_marker(KC_markers, s5_glia_marker))
 print(check_marker(DAN_markers, s5_glia_marker))
@@ -55,6 +62,10 @@ print(check_marker(Pg_markers, s5_glia_marker))
 print(check_marker(Ctxg_markers, s5_glia_marker))
 print(check_marker(IPC_markers, s5_glia_marker))
 print(check_marker(HM_markers, s5_glia_marker))
+#          gene ID fly homolog human homolog manual annotation
+# 8   LOC105186780         Gs2          GLUL               NaN
+# 13  LOC105188823        Rh50          RHBG               NaN
+# 25  LOC105188289       Eaat1        SLC1A2               NaN
 # %%
 print(check_marker(KC_markers, s6_astr_marker))
 print(check_marker(DAN_markers, s6_astr_marker))
