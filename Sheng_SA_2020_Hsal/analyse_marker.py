@@ -50,3 +50,6 @@ Dmel_markers_available
 # %%
 Dmel_markers_available.to_csv("./markers/Hsal_Dmel_allcluster_markers.csv")
 # %%
+"""
+手动在Hsal_Dmel_allcluster_markers.csv中追加: "27,Ensheathing,Slc5eg,,LOC105183203"
+"""
