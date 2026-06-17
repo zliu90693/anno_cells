@@ -60,16 +60,7 @@ sc.tl.pca(Hsal_me, n_comps=50, use_highly_variable=True)
 sc.pp.neighbors(Hsal_me)
 sc.tl.umap(Hsal_me)
 # %%
-sc.pl.umap(
-    Hsal_me,
-    color=marker_genes_in_data["neuron"],
-    vmin=0,
-    vmax="p99",  # set vmax to the 99th percentile of the gene count instead of the maximum, to prevent outliers from making expression in other cells invisible. Note that this can cause problems for extremely lowly expressed genes.
-    sort_order=False,  # do not plot highest expression on top, to not get a biased view of the mean expression among cells
-    frameon=False,
-    cmap="Reds",  # or choose another color map e.g. from here: https://matplotlib.org/stable/tutorials/colors/colormaps.html
-)
-# %%
+#! --------------------------------- Manual 1: neuron or glia? ---------------------------------
 # * leiden 1.00
 sc.pl.umap(
     Hsal_me,
@@ -82,13 +73,38 @@ sc.pl.umap(
     legend_loc="on data"
 )
 # %%
-sc.pl.umap(
-    Hsal_me,
-    color=marker_genes_in_data["glia"],
-    vmin=0,
-    vmax="p99", 
-    sort_order=False,
-    frameon=False,
-    cmap="Reds"
-)
+for ct in ["neuron", "glia"]:
+    sc.pl.umap(
+        Hsal_me,
+        color=marker_genes_in_data[ct],
+        vmin=0,
+        vmax="p99", 
+        sort_order=False,
+        frameon=False,
+        cmap="Reds"
+    )
+# %%
+#! --------------------------------- Manual 2: neurons ---------------------------------
+for ct in ["lKC", "DAN"]:
+    sc.pl.umap(
+        Hsal_me,
+        color=marker_genes_in_data[ct],
+        vmin=0,
+        vmax="p99", 
+        sort_order=False,
+        frameon=False,
+        cmap="Reds"
+    )
+# %%
+#! --------------------------------- Manual 3: glias ---------------------------------
+for ct in ["Astro glia", "Ensheathing glia", "Perineurial glia", "Cortex glia",]:
+    sc.pl.umap(
+        Hsal_me,
+        color=marker_genes_in_data[ct],
+        vmin=0,
+        vmax="p99", 
+        sort_order=False,
+        frameon=False,
+        cmap="Reds"
+    )
 # %%
