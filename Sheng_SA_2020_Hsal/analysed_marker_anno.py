@@ -45,7 +45,10 @@ marker_genes = {
 #     sum+=len(value)
 # print(sum)
 # %%
-#! Hsal_me
+#! ---------------------------------------------------------------------------
+#! --------------------------------- Hsal_me ---------------------------------
+#! ---------------------------------------------------------------------------
+
 marker_genes_in_data = {}
 for ct, markers in marker_genes.items():
     markers_found = []
@@ -55,6 +58,7 @@ for ct, markers in marker_genes.items():
     marker_genes_in_data[ct] = markers_found
 # %% 
 # https://www.sc-best-practices.org/cellular_structure/annotation.html
+
 Hsal_me.X = Hsal_me.layers["logcounts"]
 sc.tl.pca(Hsal_me, n_comps=50, use_highly_variable=True)
 sc.pp.neighbors(Hsal_me)
@@ -69,11 +73,11 @@ sc.pl.umap(
     vmax="p99",  # set vmax to the 99th percentile of the gene count instead of the maximum, to prevent outliers from making expression in other cells invisible. Note that this can cause problems for extremely lowly expressed genes.
     sort_order=False,  # do not plot highest expression on top, to not get a biased view of the mean expression among cells
     frameon=False,
-    cmap="Reds",  # or choose another color map e.g. from here: https://matplotlib.org/stable/tutorials/colors/colormaps.html
     legend_loc="on data"
 )
 # %%
 for ct in ["neuron", "glia"]:
+    print(f"{ct}:") 
     sc.pl.umap(
         Hsal_me,
         color=marker_genes_in_data[ct],
@@ -86,6 +90,7 @@ for ct in ["neuron", "glia"]:
 # %%
 #! --------------------------------- Manual 2: neurons ---------------------------------
 for ct in ["lKC", "DAN"]:
+    print(f"{ct}:") 
     sc.pl.umap(
         Hsal_me,
         color=marker_genes_in_data[ct],
@@ -98,6 +103,7 @@ for ct in ["lKC", "DAN"]:
 # %%
 #! --------------------------------- Manual 3: glias ---------------------------------
 for ct in ["Astro glia", "Ensheathing glia", "Perineurial glia", "Cortex glia",]:
+    print(f"{ct}:") 
     sc.pl.umap(
         Hsal_me,
         color=marker_genes_in_data[ct],
@@ -107,4 +113,50 @@ for ct in ["Astro glia", "Ensheathing glia", "Perineurial glia", "Cortex glia",]
         frameon=False,
         cmap="Reds"
     )
+# %%
+#! ---------------------------------------------------------------------------
+#! --------------------------------- Hsal_50 ---------------------------------
+#! ---------------------------------------------------------------------------
+marker_genes_in_data = {}
+for ct, markers in marker_genes.items():
+    markers_found = []
+    for marker in markers:
+        if marker in Hsal_50.var.index:
+            markers_found.append(marker)
+    marker_genes_in_data[ct] = markers_found
+# %%
+# Hsal_50.X = Hsal_50.layers["counts"].copy()
+# sc.pp.normalize_total(Hsal_50)
+# sc.pp.log1p(Hsal_50)
+# # Hsal_50.X = Hsal_50.layers["logcounts"]
+# sc.pp.highly_variable_genes(Hsal_50)
+# sc.tl.pca(Hsal_50, n_comps=50, use_highly_variable=True)
+# sc.pp.neighbors(Hsal_50)
+# sc.tl.umap(Hsal_50)
+# %%
+#! --------------------------------- Manual 1: neuron or glia? ---------------------------------
+# * leiden 1.00
+sc.pl.umap(
+    Hsal_50,
+    color="cluster_name",
+    vmin=0,
+    vmax="p99",  # set vmax to the 99th percentile of the gene count instead of the maximum, to prevent outliers from making expression in other cells invisible. Note that this can cause problems for extremely lowly expressed genes.
+    sort_order=False,  # do not plot highest expression on top, to not get a biased view of the mean expression among cells
+    frameon=False,
+    legend_loc="on data"
+)
+# %%
+for ct in ["neuron", "glia"]:
+    print(f"{ct}:") 
+    sc.pl.umap(
+        Hsal_50,
+        color=marker_genes_in_data[ct],
+        vmin=0,
+        vmax="p99", 
+        sort_order=False,
+        frameon=False,
+        cmap="Reds"
+    )
+# %%
+Hsal_50.write_h5ad("./Hsal50_umap_leiden_.h5ad")
 # %%
