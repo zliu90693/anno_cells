@@ -134,21 +134,23 @@ for ct, markers in marker_genes.items():
 # sc.pp.neighbors(Hsal_50)
 # sc.tl.umap(Hsal_50)
 # %%
+Hsal_50.X = Hsal_50.layers["data"].copy()
+# %%
 #! --------------------------------- Manual 1: neuron or glia? ---------------------------------
 # * leiden 1.00
-sc.pl.umap(
+sc.pl.tsne(
     Hsal_50,
     color="cluster_name",
     vmin=0,
     vmax="p99",  # set vmax to the 99th percentile of the gene count instead of the maximum, to prevent outliers from making expression in other cells invisible. Note that this can cause problems for extremely lowly expressed genes.
     sort_order=False,  # do not plot highest expression on top, to not get a biased view of the mean expression among cells
     frameon=False,
-    legend_loc="on data"
+    # legend_loc="on data"
 )
 # %%
 for ct in ["neuron", "glia"]:
     print(f"{ct}:") 
-    sc.pl.umap(
+    sc.pl.tsne(
         Hsal_50,
         color=marker_genes_in_data[ct],
         vmin=0,
@@ -159,4 +161,43 @@ for ct in ["neuron", "glia"]:
     )
 # %%
 Hsal_50.write_h5ad("./Hsal50_umap_leiden_.h5ad")
+# %%
+#! --------------------------------- Manual 2: neurons ---------------------------------
+for ct in ["lKC", "DAN"]:
+    print(f"{ct}:") 
+    sc.pl.tsne(
+        Hsal_50,
+        color=marker_genes_in_data[ct],
+        vmin=0,
+        vmax="p99", 
+        sort_order=False,
+        frameon=False,
+        cmap="Reds"
+    )
+# %%
+#! --------------------------------- Manual 3: glias ---------------------------------
+for ct in ["Astro glia", "Ensheathing glia", "Perineurial glia", "Cortex glia",]:
+    print(f"{ct}:") 
+    sc.pl.tsne(
+        Hsal_50,
+        color=marker_genes_in_data[ct],
+        vmin=0,
+        vmax="p99", 
+        sort_order=False,
+        frameon=False,
+        cmap="Reds"
+    )
+# %%
+#! --------------------------------- Manual 4: others ---------------------------------
+for ct in ["Insulin-producing cell", "Hemocytes"]:
+    print(f"{ct}:") 
+    sc.pl.tsne(
+        Hsal_50,
+        color=marker_genes_in_data[ct],
+        vmin=0,
+        vmax="p99", 
+        sort_order=False,
+        frameon=False,
+        cmap="Reds"
+    )
 # %%
