@@ -5,5 +5,9 @@
     "r.rterm.linux": "/home/liuzhiyu/Software/miniconda3/envs/rm_ambient_doublet/bin/R",
     "r.rtermSendDelay": 0,
     "r.bracketedPaste": true,
-    "python.defaultInterpreterPath": "/home/liuzhiyu/Software/miniconda3/envs/anno_cells/bin/python"
+    "python.defaultInterpreterPath": "/home/liuzhiyu/Software/miniconda3/envs/anno_cells/bin/python",
+    "markdown.preview.fontFamily": "JetBrainsMono Nerd Font",
+    "notebook.output.fontFamily": "JetBrainsMono Nerd Font",
+    "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+    "editor.fontFamily": "JetBrainsMono Nerd Font"
 }

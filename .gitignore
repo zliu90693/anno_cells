@@ -1,5 +1,10 @@
-*.h5ad
-*.rds
-*.csv
-*.png
-*.pdf
+*h5ad
+*rds
+*png
+*pdf
+*reference/
+archive/
+*loom
+*tar
+*gz
+*gtf
