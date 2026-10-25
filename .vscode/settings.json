@@ -9,5 +9,6 @@
     "markdown.preview.fontFamily": "JetBrainsMono Nerd Font",
     "notebook.output.fontFamily": "JetBrainsMono Nerd Font",
     "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
-    "editor.fontFamily": "JetBrainsMono Nerd Font"
+    "editor.fontFamily": "JetBrainsMono Nerd Font",
+    "r.interactive.arfPath": "/home/liuzhiyu/.cargo/bin//arf"
 }

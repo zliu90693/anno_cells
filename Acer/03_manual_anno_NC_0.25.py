@@ -208,23 +208,62 @@ visualize(
 #! OPN: 5, 6, 13
 # %%
 # 将已鉴定的cluster保存为csv格式，避免重复保存h5ad造成巨大写入量
-KC_clusters_025 = {"KCs": ["0", "3", "8", "20", "21"], 
+# 来自NC marker，使用条形图的鉴定结果（可能相对点图不太可信，忽略了表达特定marker的细胞比例）
+KC_clusters_025_bar = {"KCs": ["0", "3", "8", "20", "21"], 
                    "glia": ["34"], 
                    "OLC": ["9", "10", "11", "14", "15", "17", "27", "29", "31", "33"],
                    "OPN": ["6"],
                    "OLC?OPN": ["5", "13"]}
-cluster_to_celltype_025 = {
+cluster_to_celltype_025_bar = {
     cluster: celltype
-    for celltype, clusters in KC_clusters_025.items()
+    for celltype, clusters in KC_clusters_025_bar.items()
     for cluster in clusters
 }
-Acer_transfromHY.obs["celltype_025_NC"] = (
+Acer_transfromHY.obs["celltype_025_NC_bar"] = (
     Acer_transfromHY.obs["leiden_res0.25"]
-    .map(cluster_to_celltype_025)
+    .map(cluster_to_celltype_025_bar)
     .fillna("Unknown")
 )
+Acer_transfromHY.obs["celltype_025_NC_bar"].to_csv("./metadata/anno/celltype_025_NC_bar.csv")
 # %%
-Acer_transfromHY.obs["celltype_025_NC"].to_csv("./metadata/anno/celltype_025_NC.csv")
+#! 另：使用best practice中的点图重新验证，本次使用的layer是logcounts，因为best practive中使用的是“scran-normalized, log-transformed counts”
+# -----------------------------------------------------------------------------------------------------------------------------------
+# %%
+Acer_transfromHY.X = Acer_transfromHY.layers["logcounts"].copy()
+marker_genes = {
+    "KC": ["LOC107995382", "LOC107997697", "LOC107998479", "LOC107997070", "LOC108000569", "LOC107999048"],
+    "glia": ["LOC107993519", "LOC108002812", "LOC108000234", "LOC107994035", "LOC107996595", "LOC108003667"],
+    "OLC": ["LOC107996886", "LOC107999967", "LOC108002029", "LOC108004344", "LOC107999009", "LOC107996386", "LOC107998009", "LOC108000705", "LOC107992410"],
+    "OPN": ["LOC108000694"]
+}
+
+sc.pl.dotplot(
+    Acer_transfromHY,
+    groupby="leiden_res0.25",
+    var_names=marker_genes,
+    standard_scale="var",  # standard scale: normalize each gene to range from 0 to 1
+)
+# KC: 同条形，0，3，8，20，21
+# glia: 同，34
+# OLC: 同，9, 10, 11, 14, 15, 17, 27, 29, 31, 33
+#! OPN: 无法确定，5/6/13表达量高但是比例都极小，需增大分辨率后重新鉴定
+
+# 来自NC marker，使用点图的鉴定结果，相对更准确，因为反映了细胞比例
+KC_clusters_025_dot = {"KCs": ["0", "3", "8", "20", "21"], 
+                   "glia": ["34"], 
+                   "OLC": ["9", "10", "11", "14", "15", "17", "27", "29", "31", "33"],
+                   "maybe_OPN": ["5", "6", "13"]}
+cluster_to_celltype_025_dot = {
+    cluster: celltype
+    for celltype, clusters in KC_clusters_025_dot.items()
+    for cluster in clusters
+}
+Acer_transfromHY.obs["celltype_025_NC_dot"] = (
+    Acer_transfromHY.obs["leiden_res0.25"]
+    .map(cluster_to_celltype_025_dot)
+    .fillna("Unknown")
+)
+Acer_transfromHY.obs["celltype_025_NC_dot"].to_csv("./metadata/anno/celltype_025_NC_dot.csv")
 # %%
 # %%
 # %%
@@ -245,27 +284,4 @@ sc.pl.umap(
 )
 #! 结论是，13可能包含多个细胞类型，但无法确定具体身份，5似乎仅一种细胞类型，身份不确定
 # %%
-# ------------------------------------------------------------------------------------------------------------------------------------
-#! 另：使用best practice中的点图重新验证，本次使用的layer是logcounts，因为best practive中使用的是“scran-normalized, log-transformed counts”
-# -----------------------------------------------------------------------------------------------------------------------------------
-# %%
-Acer_transfromHY.X = Acer_transfromHY.layers["logcounts"].copy()
-marker_genes = {
-    "KC": ["LOC107995382", "LOC107997697", "LOC107998479", "LOC107997070", "LOC108000569", "LOC107999048"],
-    "glia": ["LOC107993519", "LOC108002812", "LOC108000234", "LOC107994035", "LOC107996595", "LOC108003667"],
-    "OLC": ["LOC107996886", "LOC107999967", "LOC108002029", "LOC108004344", "LOC107999009", "LOC107996386", "LOC107998009", "LOC108000705", "LOC107992410"],
-    "OPN": ["LOC108000694"]
-}
-
-sc.pl.dotplot(
-    Acer_transfromHY,
-    groupby="leiden_res0.25",
-    var_names=marker_genes,
-    standard_scale="var",  # standard scale: normalize each gene to range from 0 to 1
-)
-
-# KC: 同条形，0，3，8，20，21
-# glia: 同，34
-# OLC: 同，9, 10, 11, 14, 15, 17, 27, 29, 31, 33
-#! OPN: 无法确定，5/6/13表达量高但是比例都极小，需增大分辨率后重新鉴定
-# %%
+# ------------------------------------------------------------------------------------------------------------------------------------# %%

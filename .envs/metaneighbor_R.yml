@@ -1,0 +1,28 @@
+# conda create -n metaneighbor_R44 \
+#   -c conda-forge -c bioconda \
+#   r-base=4.4.3 \
+#   r-seurat=4.4.0 \
+#   r-seuratobject=5.0.2 \
+#   bioconductor-metaneighbor=1.26.0 \
+#   bioconductor-singlecellexperiment=1.28.0 \
+#   bioconductor-zellkonverter=1.16.0 \
+#   r-matrix.utils=0.9.8 \
+#   r-argparse=2.3.1 \
+#   r-dplyr=1.1.4 \
+#   r-magrittr=2.0.3 \
+#   r-stringr=1.5.2 \
+#   r-tibble=3.3.0 \
+#   r-tidyr=1.3.1 \
+#   r-reshape2=1.4.4 \
+#   r-pheatmap=1.0.13 \
+#   r-rcolorbrewer=1.1_3 \
+#   r-matrix=1.6_5 \
+#   r-plyr=1.8.9 \
+#   r-ggplot2=3.5.2 \
+#   r-hdf5r=1.3.16 \
+#   python=3.10.22 \
+#   jupyter=1.1.1 \
+#   xeus-r=0.11.2
+
+# ↑ 如果 R 版本是 4.3，xeus 的版本较低，无法在 jupyter 中正常显示图，
+# R 的版本是 4.5，会导致 Seurat 版本升至 5

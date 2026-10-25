@@ -1,3 +1,7 @@
 {
-    "python.defaultInterpreterPath": "/home/liuzhiyu/Software/miniconda3/envs/metaneighbor/bin/python"
+    "python.defaultInterpreterPath": "/home/liuzhiyu/Software/miniconda3/envs/metaneighbor/bin/python",
+    "jupyter.interactiveWindow.creationMode": "perFile",
+    // "r.consolePath": "/home/liuzhiyu/.cargo/bin/arf",
+    // "r.executablePath": "/home/liuzhiyu/Software/miniconda3/envs/metaneighbor_R/bin/R",
+    // "r.interactive.arfPath": "/home/liuzhiyu/.cargo/bin/arf"
 }

@@ -8,3 +8,5 @@ archive/
 *tar
 *gz
 *gtf
+# large tsv from FB
+fb_*

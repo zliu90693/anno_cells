@@ -1,4 +1,4 @@
-name: metaneighbor
+name: metaneighbor_py
 channels:
   - conda-forge
   - bioconda
@@ -39,11 +39,11 @@ dependencies:
   - brotli-python=1.0.9=py310hd8f1fbe_8
   - bzip2=1.0.8=hda65f42_10
   - c-ares=1.34.8=hebe6cf0_2
-  - ca-certificates=2026.7.22=hbd8a1cb_0
+  - ca-certificates=2026.10.19=hbd8a1cb_0
   - cached-property=2.0.1=pyhcf101f3_0
   - cached_property=2.0.1=pyhcf101f3_0
   - cairo=1.18.6=h3c89d7e_0
-  - certifi=2026.7.22=pyhd8ed1ab_0
+  - certifi=2026.10.19=pyhd8ed1ab_0
   - cffi=2.1.1=py310hd4ea0ea_2
   - charset-normalizer=3.5.2=h1114479_0
   - click=8.4.2=pyhc90fa1f_0
@@ -93,7 +93,7 @@ dependencies:
   - idna=3.19=pyhcf101f3_0
   - importlib-metadata=9.0.1=pyhcf101f3_0
   - interface_meta=1.3.0=pyhd8ed1ab_1
-  - ipykernel=7.3.0=pyha191276_0
+  - ipykernel=6.31.0=pyha191276_0
   - ipython=8.37.0=pyh8f84b5b_0
   - ipywidgets=8.1.9=pyhd8ed1ab_0
   - isoduration=20.11.0=pyhd8ed1ab_1
@@ -206,6 +206,7 @@ dependencies:
   - nbconvert-core=7.17.1=pyhcf101f3_0
   - nbformat=5.11.1=pyhcf101f3_0
   - ncurses=6.6=hdb14827_1
+  - nest-asyncio=1.6.0=pyhd8ed1ab_1
   - nest-asyncio2=1.7.2=pyhcf101f3_0
   - networkx=3.4.2=pyh267e887_2
   - notebook=7.6.2=pyhcf101f3_0
@@ -336,4 +337,4 @@ dependencies:
   - pip:
       - gppy==0.1.5
       - pymetaneighbor==1.0.0
-prefix: /home/liuzhiyu/Software/miniconda3/envs/metaneighbor
+prefix: /home/liuzhiyu/Software/miniconda3/envs/metaneighbor_py
