@@ -7,9 +7,10 @@ import anndata
 from functions.anno_utils import *
 # %%
 Acer_transfromHY = sc.read_h5ad("./matrix/01_Acer_transfromHY.h5ad")
-Acer_transfromHY.X = Acer_transfromHY.layers["counts"].copy()
-sc.pp.normalize_total(Acer_transfromHY)
-Acer_transfromHY.layers["norm_counts"] = Acer_transfromHY.X.copy()
+# Acer_transfromHY.X = Acer_transfromHY.layers["counts"].copy()
+Acer_transfromHY.X = Acer_transfromHY.layers["logcounts"].copy()
+# sc.pp.normalize_total(Acer_transfromHY)
+# Acer_transfromHY.layers["norm_counts"] = Acer_transfromHY.X.copy()
 # %%
 marker_genes = {
     "KC": ["LOC107995382", "LOC107997697", "LOC107998479", "LOC107997070", "LOC108000569", "LOC107999048"],

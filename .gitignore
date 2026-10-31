@@ -10,3 +10,5 @@ archive/
 *gtf
 # large tsv from FB
 fb_*
+MN_metadata/
+*RDS

@@ -21,7 +21,7 @@ Acer.obs["celltype_025_NC_bar"] = Acer.obs.index.map(celltype_map_bar)
 # %%
 sc.pl.umap(
     Acer, 
-    color=["celltype_025_NC_bar", "leiden_res0.25"]
+    color=["celltype_025_NC_bar"]
 )
 # %%
 #! 基于NC的marker的表达量点图确定的细胞身份(分辨率0.25)
@@ -60,4 +60,14 @@ sc.pl.umap(
     color=["celltype_100_NC_dot"]
 )
 # %%
-#! 接下来将转入基于 R 的 MetaNeighbor
+#! 使用iScience的数据进行MetaNeighbor(py)(Acer分辨率0.5），其结果与NC marker综合后的结果：
+celltype_050_dotMN = pd.read_csv("../../Acer/metadata/anno/celltype_050_dotMN.csv")
+celltype_050_dotMN["Unnamed: 0"].to_list() == Acer.obs.index.to_list() # True
+# %%
+celltype_map_dot = celltype_050_dotMN.set_index("Unnamed: 0")["celltype_050_dotMN"]
+Acer.obs["celltype_050_dotMN"] = Acer.obs.index.map(celltype_map_dot)
+sc.pl.umap(
+    Acer, 
+    color=["celltype_050_dotMN"]
+)
+# %%
