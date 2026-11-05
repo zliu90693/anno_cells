@@ -1,0 +1,3 @@
+注意，我在 2026/11/03 时更改了 downstream_analysis_scVI 项目中聚类的方案，将 sc.tl.leiden 中的 n_iterations 由默认值 2 更改为 -1，并添加了若干分辨率，进行重新聚类；
+
+随后我将新聚类的结果用到了 anno_cells(基于marker的基础注释) 和 SATURN_anno 中，覆盖了原本使用旧聚类的注释流程，但当前子项目 MetaNeighbor 由于先前效果不好，故始终未进行替换

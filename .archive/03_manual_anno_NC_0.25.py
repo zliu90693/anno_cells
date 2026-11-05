@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import anndata
-from functions.anno_utils import *
+# from functions.anno_utils import *
 # %%
 Acer_transfromHY = sc.read_h5ad("./matrix/01_Acer_transfromHY.h5ad")
 Acer_transfromHY.X = Acer_transfromHY.layers["counts"].copy()
@@ -18,7 +18,7 @@ Amel_gid_gname = Amel_gtf[["gene_name", "gene_id"]]
 Amel_gid_gname.to_csv("./metadata/Amel_gid_gname.tsv", sep="\t")
 # %%
 #! --------------------------------------- KC Marker --------------------------------------- 
-Mu_KC_Marker = {"Pkc", "LOC408976", "E75", "LOC408804", "Cac", "Tk"} #! Mu et al附件中提及的西蜂Marker (gene name格式)
+Mu_KC_Marker = {"Pkc", "LOC408976", "E75", "LOC408804", "Cac", "Tk", "DopR2", "LOC412299"} #! Mu et al附件中提及的西蜂Marker (gene name格式)
 print(Amel_gid_gname[Amel_gid_gname["gene_name"].isin(Mu_KC_Marker)].drop_duplicates())
 #   gene_name        gene_id
 #   Pkc  GeneID_406106
@@ -27,14 +27,18 @@ print(Amel_gid_gname[Amel_gid_gname["gene_name"].isin(Mu_KC_Marker)].drop_duplic
 #   Cac  GeneID_408764
 #   LOC408976   LOC408976
 #   LOC408804   LOC408804
+#   DopR2   GeneID_406070 来自Fig1D，附件S2B
+#   LOC412299   LOC412299 来自Fig1D，附件S2B
 # %%
 KC_Marker = [ #! 东方蜜蜂的同源Marker
     "LOC107995382", # Pkc
     "LOC107997697", # E75
     "LOC107998479", # Tk
     "LOC107997070", # Cac
-    "LOC108000569", # LOC408976
-    "LOC107999048", # LOC408804
+    "LOC108000569", # LOC408976, sgg
+    "LOC107999048", # LOC408804, PLCe
+    "LOC107996358", # GeneID_406070,DopR2
+    "LOC107999991" # LOC412299,LOC412299/mAChR-DM1
 ]
 # %%
 cluster_key="leiden_res0.25"
@@ -114,6 +118,7 @@ visualize(
         cluster_order=cluster_order
     )
 )
+# %%
 #! 只有34是glia，本组东方蜜蜂的glia占比确实极低
 # %%
 #! --------------------------------------- OLC --------------------------------------- 

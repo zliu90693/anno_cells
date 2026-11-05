@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import anndata
 from functions.anno_utils import *
 # %%
-Acer_transfromHY = sc.read_h5ad("./matrix/01_Acer_transfromHY.h5ad")
+Acer_transfromHY = sc.read_h5ad("./matrix/02_Acer_transfromHY.h5ad")
 # %%
 Acer_transfromHY
 # %%
@@ -24,21 +24,21 @@ Acer_transfromHY
 # %%
 marker_genes = [
     "LOC108004334", # LOC410689，即elav同源基因，神经元普遍表达的基因
-    # 图D
-    "LOC108002506", # LOC408372，即mub同源基因
-    "LOC107999048", # LOC408804，即plc同源基因
-    "LOC107993336", # LOC410151，即repo同源基因
-    "LOC108001026", # LOC408480，即ced6同源基因
-    "LOC108002036", # LOC724282，即opt同源基因
-    "LOC108001977", # LOC724148，即c15同源基因
-    "LOC107999745", # LOC410657，即acj6同源基因
-    "LOC108000694", # LOC413466，即oaz同源基因
-    "LOC108004139", # LOC551684，即Fer2LCH同源基因
-    "LOC108001681", # LOC411597，即Hml同源基因
+    # 图1D
+    "LOC108002506", # LOC408372，即mub同源基因,KC
+    "LOC107999048", # LOC408804，即plc同源基因,KC
+    "LOC107993336", # LOC410151，即repo同源基因,glia
+    "LOC108001026", # LOC408480，即ced6同源基因,glia
+    "LOC108002036", # LOC724282，即opt同源基因,OPN
+    "LOC108001977", # LOC724148，即c15同源基因,OPN
+    "LOC107999745", # LOC410657，即acj6同源基因,OPN
+    "LOC108000694", # LOC413466，即oaz同源基因,OPN
+    "LOC108004139", # LOC551684，即Fer2LCH同源基因,Hemo
+    "LOC108001681", # LOC411597，即Hml同源基因,Hemo
 ]
 
 marker_genes_OL = [
-    # 图E
+    # 图1E
     "LOC107993080", # LOC409937，即ninaC同源基因
     "LOC108003337", # LOC724608，即trp同源基因
     "LOC107999009", # LOC724801，即bsh同源基因
@@ -50,6 +50,28 @@ marker_genes_OL = [
     "LOC108004330", # LOC411315，即vsx1同源基因
     "LOC108003229", # LOC408872，即svp同源基因
     "LOC108004323" # 应该是Hiscl1的同源基因，原文没提，在Flybase中确定Hiscl1的gid随后查询同源基因获得
+]
+
+marker_genes_KC = [
+    # 图3B
+    "LOC107995382", # GeneID_406106，Pkc
+    "LOC108002263", # GeneID_408521，mblk-1，large-type Class-I KC
+    "LOC107997067", # GeneID_408758，E74，small-type Class-I KC
+    "LOC108000201", # GeneID_408423，FoxP，FoxP-expressing KC
+]
+
+mrker_genes_neurotransmitter = [
+    # 图2
+    "LOC107993140", # LOC408934，ChAT，胆碱能
+    "LOC107993179", # LOC725064，VAChT，胆碱能
+    "LOC107994928", # LOC410752，VGlut，谷氨酸能
+    "LOC107996223", # LOC408432，Gad1，GABA能
+    "LOC107995375", # LOC409089，VGAT，GABA能
+    "LOC108000696", # LOC408517，Vmat，单胺能
+    "LOC107999422", # GeneID_408930，ple，多巴胺能
+    "LOC107997295", # LOC410948，Tdc2，章鱼胺能
+    "LOC107994910", # GeneID_412285，DAT，5-羟色胺能
+    "LOC108003440" # LOC411200，TDH，组胺能
 ]
 # %%
 
